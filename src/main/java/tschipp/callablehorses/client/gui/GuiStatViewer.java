@@ -20,7 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
@@ -53,7 +53,7 @@ public class GuiStatViewer extends Screen
 
 	public GuiStatViewer(Player player)
 	{
-		super(new TextComponent("Horse Stat Viewer"));
+		super(Component.literal("Horse Stat Viewer"));
 		this.owner = HorseHelper.getOwnerCap(player);
 		this.horse = owner.createHorseEntity(player.level);
 		horse.getAttributes().load(owner.getHorseNBT().getList("Attributes", 10)); // Read

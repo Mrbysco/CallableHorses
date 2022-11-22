@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,7 +27,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.MinecraftForge;
@@ -57,7 +57,7 @@ public class HorseManager
 			{
 				if (horseOwner.getHorseNBT().isEmpty())
 				{
-					player.displayClientMessage(new TranslatableComponent("callablehorses.error.nohorse").withStyle(ChatFormatting.RED), true);
+					player.displayClientMessage(Component.translatable("callablehorses.error.nohorse").withStyle(ChatFormatting.RED), true);
 					return false;
 				}
 
@@ -127,7 +127,7 @@ public class HorseManager
 		{
 			if (player.getVehicle() == null)
 			{
-				player.displayClientMessage(new TranslatableComponent("callablehorses.error.notriding").withStyle(ChatFormatting.RED), true);
+				player.displayClientMessage(Component.translatable("callablehorses.error.notriding").withStyle(ChatFormatting.RED), true);
 				return;
 			}
 
@@ -145,13 +145,13 @@ public class HorseManager
 
 				if (owned && !owner.equals(playerID))
 				{
-					player.displayClientMessage(new TranslatableComponent("callablehorses.error.alreadyowned").withStyle(ChatFormatting.RED), true);
+					player.displayClientMessage(Component.translatable("callablehorses.error.alreadyowned").withStyle(ChatFormatting.RED), true);
 					return;
 				}
 
 				if (owned && owner.equals(playerID))
 				{
-					player.displayClientMessage(new TranslatableComponent("callablehorses.error.alreadypersonal").withStyle(ChatFormatting.RED), true);
+					player.displayClientMessage(Component.translatable("callablehorses.error.alreadypersonal").withStyle(ChatFormatting.RED), true);
 					return;
 				}
 
@@ -181,7 +181,7 @@ public class HorseManager
 				horseOwner.setHorse((AbstractHorse) e, player);
 				HorseHelper.setHorseLastSeen(player);
 				HorseHelper.setHorseNum((ServerLevel) e.level, storedHorse.getStorageUUID(), storedHorse.getHorseNum());
-				player.displayClientMessage(new TranslatableComponent("callablehorses.success"), true);
+				player.displayClientMessage(Component.translatable("callablehorses.success"), true);
 				HorseHelper.sendHorseUpdateInRange(e);
 
 			}
@@ -194,7 +194,7 @@ public class HorseManager
 
 		if (owner.getHorseNBT().isEmpty())
 		{
-			player.displayClientMessage(new TranslatableComponent("callablehorses.error.nohorse").withStyle(ChatFormatting.RED), true);
+			player.displayClientMessage(Component.translatable("callablehorses.error.nohorse").withStyle(ChatFormatting.RED), true);
 			return;
 		}
 
@@ -264,13 +264,13 @@ public class HorseManager
 	{
 		if (isAreaProtected(player, null))
 		{
-			player.displayClientMessage(new TranslatableComponent("callablehorses.error.area").withStyle(ChatFormatting.RED), true);
+			player.displayClientMessage(Component.translatable("callablehorses.error.area").withStyle(ChatFormatting.RED), true);
 			return false;
 		}
 
 		if (player.getVehicle() != null)
 		{
-			player.displayClientMessage(new TranslatableComponent("callablehorses.error.riding").withStyle(ChatFormatting.RED), true);
+			player.displayClientMessage(Component.translatable("callablehorses.error.riding").withStyle(ChatFormatting.RED), true);
 			return false;
 		}
 
@@ -299,7 +299,7 @@ public class HorseManager
 						BlockState state = world.getBlockState(pos);
 						if (state.getBlock().getCollisionShape(state, world, pos, null) != Shapes.empty())
 						{
-							player.displayClientMessage(new TranslatableComponent("callablehorses.error.nospace").withStyle(ChatFormatting.RED), true);
+							player.displayClientMessage(Component.translatable("callablehorses.error.nospace").withStyle(ChatFormatting.RED), true);
 							return false;
 						}
 					}
@@ -317,7 +317,7 @@ public class HorseManager
 				if (allowedDims.get(i).equals(playerDim.location().toString()))
 					return true;
 			}
-			player.displayClientMessage(new TranslatableComponent("callablehorses.error.dim").withStyle(ChatFormatting.RED), true);
+			player.displayClientMessage(Component.translatable("callablehorses.error.dim").withStyle(ChatFormatting.RED), true);
 			return false;
 		}
 
@@ -352,7 +352,7 @@ public class HorseManager
 			if (distance <= maxDistance)
 				return true;
 
-			player.displayClientMessage(new TranslatableComponent("callablehorses.error.range").withStyle(ChatFormatting.RED), true);
+			player.displayClientMessage(Component.translatable("callablehorses.error.range").withStyle(ChatFormatting.RED), true);
 			return false;
 		}
 
@@ -363,7 +363,7 @@ public class HorseManager
 	{
 		if (isAreaProtected(player, entity))
 		{
-			player.displayClientMessage(new TranslatableComponent("callablehorses.error.setarea").withStyle(ChatFormatting.RED), true);
+			player.displayClientMessage(Component.translatable("callablehorses.error.setarea").withStyle(ChatFormatting.RED), true);
 			return false;
 		}
 
